@@ -1,4 +1,7 @@
 class RAGService:
+    def __init__(self, config):
+        self.config = config
+
     def ingest(self, file):
         return f"received file: {file.filename}"
 
