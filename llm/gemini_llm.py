@@ -5,12 +5,12 @@ from llm.base import BaseLLM
 
 class GeminiLLM(BaseLLM):
 
-    def __init__(self, api_key, model="gemini-2.5-flash-lite"):
+    def __init__(self, api_key: str, model: str = "gemini-2.5-flash-lite"):
         self.api_key = api_key
         self.model = model
         self.base_url = "https://generativelanguage.googleapis.com/v1beta"
 
-    def generate(self, prompt):
+    def generate(self, prompt: str) -> str:
 
         url = (
             f"{self.base_url}/models/"
@@ -30,7 +30,6 @@ class GeminiLLM(BaseLLM):
         )
 
         request.raise_for_status()
-
         data = request.json()
 
         return data["candidates"][0]["content"]["parts"][0]["text"]
