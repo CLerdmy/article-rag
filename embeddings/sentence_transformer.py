@@ -1,5 +1,6 @@
-from embeddings.base import BaseEmbedder
 from sentence_transformers import SentenceTransformer
+
+from embeddings.base import BaseEmbedder
 
 
 class SentenceTransformerEmbedder(BaseEmbedder):
@@ -8,7 +9,5 @@ class SentenceTransformerEmbedder(BaseEmbedder):
         self.model = SentenceTransformer(model_name)
 
     def embed(self, text: str) -> list[float]:
-        
         embedding = self.model.encode(text, normalize_embeddings=True)
-        
         return embedding.tolist()
