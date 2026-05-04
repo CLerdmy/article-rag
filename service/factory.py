@@ -10,19 +10,19 @@ from rag.retrieval.retrievers import SimpleRetriever
 def create_embedder(config: EmbeddingConfig):
     if config.provider == "sentence_transformer":
         return SentenceTransformerEmbedder(config.model)
-    raise ValueError("Unknown embedder")
+    raise ValueError("Неизвестный embedder")
 
 def create_llm(config: LLMConfig):
     if config.provider == "gemini":
         return GeminiLLM(api_key=config.api_key, model=config.model)
-    raise ValueError("Unknown LLM")
+    raise ValueError("Неизвестная LLM")
 
 def create_chunker(config: ChunkingConfig):
     if config.model == "sliding_window":
         return SlidingWindowChunker(size=config.size, overlap=config.overlap)
-    raise ValueError("Unknown chunker")
+    raise ValueError("Неизвестный chunker")
 
 def create_retriever(embedder: BaseEmbedder, store: BaseVectorStore, config: RetrievalConfig):
     if config.model == "simple":
         return SimpleRetriever(embedder=embedder, store=store, top_k=config.top_k)
-    raise ValueError("Unknown retriever")
+    raise ValueError("Неизвестный retriever")
