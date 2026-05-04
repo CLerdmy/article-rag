@@ -1,0 +1,48 @@
+{
+    "domain": "alzheimer",
+
+    "vector_db": {
+        "url": "http://qdrant:6333"
+    },
+
+    "embedding": {
+        "type": "local",
+        "provider": "sentence_transformer",
+        "model": "all-MiniLM-L6-v2",
+        "size": 384
+    },
+
+    "llm": {
+        "type": "api",
+        "provider": "gemini",
+        "model": "gemini-2.5-flash",
+        "api_key": "..."
+    },
+
+    "chunking": {
+        "model": "sliding_window",
+        "size": 500,
+        "overlap": 50
+    },
+
+    "retrieval": {
+        "model": "simple",
+        "top_k": 5
+    },
+
+    "llm_prompt": {
+        "use_custom": false,
+        "template_name": "default",
+        
+        "custom_template": {
+            "include_title": true,
+            "include_score": true,
+            "score_precision": 3,
+            
+            "system_prompt": "Ты - эксперт по научным статьям. Отвечай кратко и по фактам.",
+            "context_intro": "Ниже представлены фрагменты из научных статей:",
+            "question_prefix": "Вопрос исследователя:",
+            "answer_instruction": "Если ответа нет в контексте, напиши 'Информация не найдена'."
+        }
+    }
+}
